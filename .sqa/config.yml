@@ -1,0 +1,21 @@
+# .sqa/config.yml - jenkins-pipeline-library configuration file
+config:
+  project_repos:
+    saps-dispatcher:
+      repo: 'https://github.com/EOSC-synergy/saps-dispatcher'
+      branch: develop
+
+sqa_criteria:
+   qc_style:
+     repos:
+       saps-dispatcher:
+         container: dispatcher-testing
+         commands:
+           - mvn -f /saps-dispatcher-repo/pom.xml spotless:check
+   qc_coverage:
+     repos:
+       saps-dispatcher:
+         container: dispatcher-testing
+         commands:
+           - mvn -f /saps-dispatcher-repo/pom.xml -B -DskipTests clean package
+           - mvn -f /saps-dispatcher-repo/pom.xml test
